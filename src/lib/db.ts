@@ -57,7 +57,23 @@ export interface Complaint {
   createdAt?: string;
 }
 
-const dbPath = path.resolve(process.cwd(), 'complaints.db');
+import fs from 'fs';
+
+let dbPath = path.resolve(process.cwd(), 'complaints.db');
+
+if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+  const tmpPath = path.join('/tmp', 'complaints.db');
+  if (!fs.existsSync(tmpPath)) {
+    try {
+      if (fs.existsSync(dbPath)) {
+        fs.copyFileSync(dbPath, tmpPath);
+      }
+    } catch (e) {
+      console.error("Failed to copy DB to /tmp", e);
+    }
+  }
+  dbPath = tmpPath;
+}
 
 // @ts-ignore
 const db = global.db || new Database(dbPath);
