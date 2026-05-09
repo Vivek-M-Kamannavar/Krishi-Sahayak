@@ -218,3 +218,56 @@ button {
 .nav-link:hover::after {
   width: 100%;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .nav-links {
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .nav-brand {
+    font-size: 1.25rem;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .glass-card {
+    padding: 1.5rem !important;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Override inline flex basis for guide layouts to force vertical stacking */
+  div[style*="flex: 1 1 500px"] {
+    flex-basis: 100% !important;
+    height: auto !important;
+  }
+
+  /* Reduce height of large hero/guide images */
+  div[style*="height: 350px"], 
+  div[style*="height: 400px"], 
+  div[style*="height: 450px"] {
+    height: 250px !important;
+  }
+
+  /* Ensure grids shrink on tiny screens */
+  div[style*="gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'"],
+  div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"] {
+    grid-template-columns: 1fr !important;
+  }
+}
